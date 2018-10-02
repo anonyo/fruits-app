@@ -10,6 +10,7 @@ class Api::V1::FruitsController < ApplicationController
 
   def destroy
     Fruit.destroy(params[:id])
+    head :no_content
   end
 
   def update

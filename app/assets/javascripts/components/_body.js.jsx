@@ -7,6 +7,7 @@ class Body extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.addNewFruit = this.addNewFruit.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.deleteFruit = this.deleteFruit.bind(this)
   }
   componentDidMount(){
     fetch('/api/v1/fruits.json')
@@ -32,16 +33,24 @@ class Body extends React.Component {
     })
   }
 
-
   handleDelete(id) {
     fetch(`http://localhost:3000/api/v1/fruits/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then((response) => { console.log('Item was deleted!') })
+    }).then((response) => {
+      this.deleteFruit(id)
+      alert('Item was deleted!')
+    })
   }
 
+  deleteFruit(id){
+    newFruits = this.state.fruits.filter((fruit) => fruit.id !== id)
+    this.setState({
+      fruits: newFruits
+    })
+  }
 
   render(){
     return(
