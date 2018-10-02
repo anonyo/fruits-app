@@ -1,18 +1,20 @@
 class Body extends React.Component {
-constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       fruits: []
     };
   }
-componentDidMount(){
+  componentDidMount(){
     fetch('/api/v1/fruits.json')
       .then((response) => {return response.json()})
       .then((data) => {this.setState({ fruits: data }) });
   }
-render(){
+  render(){
     return(
       <div>
+        <NewFruit />
+        <AllFruits fruits={this.state.fruits} />
       </div>
     )
   }
